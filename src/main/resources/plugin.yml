@@ -1,0 +1,8 @@
+name: DisableSuffocation
+version: ${project.version}
+main: es.mithrandircraft.disablesuffocation.DisableSuffocation
+api-version: 1.15
+prefix: DisableSuffocation
+authors: [__Mithrandir__]
+description: Disables suffocation
+website: www.mithrandircraft.es
