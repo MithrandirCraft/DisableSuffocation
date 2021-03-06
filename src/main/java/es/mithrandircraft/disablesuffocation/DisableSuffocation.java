@@ -1,5 +1,6 @@
 package es.mithrandircraft.disablesuffocation;
 
+import org.bukkit.WorldBorder;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,12 +15,17 @@ public final class DisableSuffocation extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
     }
 
+    //Block suffocation
     @EventHandler
     public void EntityDamageEvent(EntityDamageEvent ev)
     {
         if(ev.getEntityType() == EntityType.PLAYER && ev.getCause() == EntityDamageEvent.DamageCause.SUFFOCATION)
         {
-            ev.setCancelled(true);
+            //Outside border exclusion
+            double worldDiameter = ev.getEntity().getWorld().getWorldBorder().getSize()/2;
+            if(ev.getEntity().getLocation().getBlockX() > worldDiameter || ev.getEntity().getLocation().getBlockZ() > worldDiameter ||
+               ev.getEntity().getLocation().getBlockX() < -worldDiameter || ev.getEntity().getLocation().getBlockZ() < -worldDiameter)
+                    ev.setCancelled(true);
         }
     }
 }
